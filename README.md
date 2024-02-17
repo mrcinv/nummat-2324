@@ -1,93 +1,144 @@
-# Numerična matematika 2023-24
+# Vaje pri predmetu Numerična matematika
 
+## Navodila
 
+To je projekt za delo pri predmetu [Numerična matematika](https://ucilnica.fri.uni-lj.si/course/view.php?id=117). Projekt je na začetku semestra prazen, tekom semestra bomo na vsakih vajah dodali rešitve. Gradiva z bolj podrobnim opisom so pripravljena v repozitoriju [z gradivi](https://nummat.gitlab.io/vaje-nummat/).
 
-## Getting started
+Predlagam, da si vsak naredi svoj Git repozitorij (na Gitlabu, Githubu ali kje drugje), kjer si uredi kodo in dokumentacijo, ki jo bomo pisali pri tem predmetu. Prav tako bomo git
+uporabljali za oddajo domačih nalog.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Navodila za hiter začetek
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Ob začetku vaje si najprej ustvarimo direktorij oziroma paket za Julio[^1], kjer bo shranjeno naše delo
 
-## Add your files
+```shell
+$ julia
+julia> # pritisnemo ], da pridemo v način pkg
+pkg> generate VajaXY
+pkg> activate VajaXY
+(VajaXY) pkg> # pritisnemo tipko za brisanje nazaj, da zopet pridemo v navaden način
+julia>
+```
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+Zgornji ukazi ustvarijo direktorij `VajaXY` z osnovno struktura [paketa v Jiliji](https://pkgdocs.julialang.org/v1/creating-packages/)
+
+```shell
+julia> cd("VajaXY") # pritisnemo ;, da pridemo v način lupine
+shell> tree .
+.
+├── Project.toml
+└── src
+    └── VajaXY.jl
+
+1 directory, 2 files
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/nummat/nummat-2324.git
-git branch -M main
-git push -uf origin main
+
+Direktoriju dodamo še teste, skripte z demnostracijsko kodo in README dokument.
+
+```shell
+shell> mkdir test
+shell> touch test/runtests.jl
+shell> touch README.md
+shell> mkdir scripts
+shell> touch scripts/demo.jl
+shell> tree .
+.
+├── Manifest.toml
+├── Project.toml
+├── scripts
+│   └── demo.jl
+├── src
+│   └── VajaXY.jl
+└── test
+    └── runtests.jl
 ```
 
-## Integrate with your tools
+Ko je direktorij s kodo pripravljen lahko naložimo kodo iz `VajaXY.jl` v ukazni vrstici
 
-- [ ] [Set up project integrations](https://gitlab.com/nummat/nummat-2324/-/settings/integrations)
+```shell
+julia> using VajaXY
+julia> VajaXY.moja_super_funkcija()
+```
 
-## Collaborate with your team
+Boljša možnost je, da kodo uporabimo v scripti npr. `scripts\demo.jl`.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+```jl
+# demo.jl vsebuje primere uporabe funkcije iz modula/paketa VajaXY
+using VajaXY
 
-## Test and Deploy
+VajaXY.moja_super_funkcija()
+```
 
-Use the built-in continuous integration in GitLab.
+Scripto nato poženemo z ukazom `ìnclude`.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+```shell
+julia> include("scripts/demo.jl")
+```
 
-***
+Začetno strukturo paketa si lahko shranimo v šablono. Pri tem pomaga paket [PkgTemplate](https://github.com/invenia/PkgTemplates.jl).
 
-# Editing this README
+### Testi
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Vstopna točka za teste je `test\runtests.jl`. Paket [Test](https://docs.julialang.org/en/v1/stdlib/Test/) omogoča pisanje enotskih testov, ki se lahko avtomatično izvedejo v sistemu [nenehne integracije (Continuous Integration)](https://en.wikipedia.org/wiki/Continuous_integration).
 
-## Suggestions for a good README
+V juliji teste pišemo z makroji [@test](https://docs.julialang.org/en/v1/stdlib/Test/#Test.@test) in [@testset](https://docs.julialang.org/en/v1/stdlib/Test/#Test.@testset). Če `test/runtests.jl` lahko napišemo
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+```jl
+using Test, VajaXY
 
-## Name
-Choose a self-explaining name for your project.
+@test VajaXY.funkcija_ki_vrne_ena() == 1
+```
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Lahko teste poženemo tako, da v `pkg` načinu poženemo ukaz `test`
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+```shell
+(VajaXY) pkg> test
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+    Testing Running tests...
+    Testing VajaXY tests passed
+```
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+### Dokumentacija
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Za pisanje dokumentacijo navadno uporabimo format [Markdown](https://en.wikipedia.org/wiki/Markdown). S paketom [Documenter](https://documenter.juliadocs.org/stable/) lahko komentarje v kodi in markdown dokumentente združimo in generiramo HTML ali PDF dokumentacijo s povezavo na izvorno kodo.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Za pripravo posameznih poročil lahko uporabite [IJulia](https://github.com/JuliaLang/IJulia.jl), [Weave.jl](https://github.com/JunoLab/Weave.jl), [Literate.jl](https://github.com/fredrikekre/Literate.jl) ali [Quadro](https://quarto.org/docs/computations/julia.html).
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## Organizacija direktorijev
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+- `vaje` direktorij z vajami
+- `vaje/VajaXY` vsaka vaja ima svoj direktorij
+- posamezen direktorij za vajo je organiziran kot paket s kodo, testi in dokumentacijo
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+        vaje
+         └── Vaja01
+           ├── Project.toml
+           ├── README.md
+           ├── src
+           |   └─ Vaja01.jl
+           ├── test
+           |   └─ runtests.jl
+           ├── doc
+           |   ├─  makedocs.jl
+           |   └─ index.md
+           └─ scripts
+              └─ demo.jl
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Delovno okolje
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Za hitrejše in lažje delo z programskim jezikom `julia` uporabite [Revise](https://timholy.github.io/Revise.jl/stable/). Pred začetkom dela poženite
 
-## License
-For open source projects, say how it is licensed.
+```julia
+julia> using Revise
+```
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Namestite `startup.jl` v `.julia/config/startup.jl`, da se `Revise` zažene ob zagonu `julia`.
+
+## Povezave
+
+- [Način dela za Gitlab (Gitlab Flow)](https://docs.gitlab.com/ee/topics/gitlab_flow.html).
+- [Priporočila za stil Julia](https://docs.julialang.org/en/v1/manual/style-guide/).
+- [Naveti za delo z Julijo](https://docs.julialang.org/en/v1/manual/workflow-tips/).
+
+[^1]: Na vajah bomo uporabljali programski jezik Julia. Študentje lahko, če želijo, na vajah in za izdelavo domačih nalog uporabljajo katerikoli programski jezik.
