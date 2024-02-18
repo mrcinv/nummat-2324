@@ -46,4 +46,4 @@ ENV PATH "$PATH:/home/gitpod/bin"
 RUN tlmgr --version
 
 # Install mmissing tex packages
-RUN tlmgr install microtype upquote listings
+RUN tlmgr install microtype upquote listings minted
