@@ -7,7 +7,7 @@ RUN sudo apt-get update \
     && sudo apt-get install -y \
     build-essential \
     libatomic1 \
-    python \
+    python3 \
     gfortran \
     perl \
     wget \
