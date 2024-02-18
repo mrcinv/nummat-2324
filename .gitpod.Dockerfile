@@ -32,8 +32,18 @@ COPY .packages/*.toml $TEMP
 RUN julia --project=$TEMP -e 'import Pkg; Pkg.instantiate(); Pkg.build();'
 
 # add Revise to startup
+RUN julia -e 'import Pkg; Pkg.add("Revise");'
 RUN mkdir -p /home/gitpod/.julia/config/
 
 COPY startup.jl /home/gitpod/.julia/config/    
 # smoke test
 RUN	julia --version
+
+# install tinytex ()
+RUN curl -sL "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+ENV PATH "$PATH:/home/gitpod/bin"
+# smoke test
+RUN tlmgr --version
+
+# Install mmissing tex packages
+RUN tlmgr install microtype upquote listings
