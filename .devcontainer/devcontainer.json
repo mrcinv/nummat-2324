@@ -10,9 +10,6 @@
 		// A Feature to install Julia via juliaup. More info: https://github.com/JuliaLang/devcontainer-features/tree/main/src/julia.
 		"ghcr.io/julialang/devcontainer-features/julia:1": {
 			"channel": "release"
-		},
-		"ghcr.io/prulloac/devcontainer-features/latex:1": {
-			"scheme": "basic"
 		}
 	}
 
