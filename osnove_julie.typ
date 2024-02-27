@@ -104,3 +104,49 @@ REPL način paketov (`pkg>`):
     ```
   ]
 )
+
+#pagebreak()
+
+== Podatkovni tipi
+#stack( dir: ltr,
+rect(
+  [
+    ```jl
+    # podatkovna struktura s polji x in y
+    struct Point2d { 
+      x
+      y
+    }
+    ```
+  ]
+  ),
+  rect(
+    [
+      ```jl
+      point = Point2d(1.2, 2.3)
+      point.x
+      point.y
+      ```
+    ]
+  )
+)
+
+#rect(
+  [
+    ```jl
+    # dodajanje metod za specifične tipe
+    length(p::Point2d) = sqrt(p.x^2 + p.y^2)
+    ```
+  ]
+)
+
+=== Definicija Operatorjev
+
+#rect(
+  [
+    ```jl
+    import Base: +
+    +(p::Point2d, q::Point2d) = Point2d(p.x + q.x, p.y + q.y)
+    ```
+  ]
+)
