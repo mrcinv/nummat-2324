@@ -1,3 +1,3 @@
 using Weave
 
-Weave.weave("demo.jl", doctype="minted2pdf", out_path=:pwd)
+Weave.weave("VzorecVaje/docs/demo.jl", doctype="minted2pdf", out_path="VzorecVaje/build")

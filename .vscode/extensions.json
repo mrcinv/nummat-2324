@@ -1,5 +1,6 @@
 {
   "recommendations": [
-    "julialang.language-julia"
+    "julialang.language-julia",
+    "ms-vscode-remote.remote-containers"
   ]
 }

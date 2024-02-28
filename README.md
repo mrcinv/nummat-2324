@@ -20,7 +20,7 @@ pkg> activate VajaXY
 julia>
 ```
 
-Zgornji ukazi ustvarijo direktorij `VajaXY` z osnovno struktura [paketa v Jiliji](https://pkgdocs.julialang.org/v1/creating-packages/)
+Zgornji ukazi ustvarijo direktorij `VajaXY` z osnovno struktura [paketa v Jiliji](https://pkgdocs.julialang.org/v1/creating-packages/). Za bolj obsežen projekt, lahko uporabite [šablono PkgTemplates](https://github.com/JuliaCI/PkgTemplates.jl).
 
 ```shell
 julia> cd("VajaXY") # pritisnemo ;, da pridemo v način lupine
@@ -76,7 +76,7 @@ Scripto nato poženemo z ukazom `ìnclude`.
 julia> include("scripts/demo.jl")
 ```
 
-Začetno strukturo paketa si lahko shranimo v šablono. Pri tem pomaga paket [PkgTemplate](https://github.com/invenia/PkgTemplates.jl).
+Začetno strukturo paketa si lahko shranimo v šablono.
 
 ### Testi
 
@@ -134,6 +134,15 @@ julia> using Revise
 ```
 
 Namestite `startup.jl` v `.julia/config/startup.jl`, da se `Revise` zažene ob zagonu `julia`.
+
+### Generiranje PDF dokumentov
+
+Za generiranje PDF dokumentov s paketi [Documenter](https://documenter.juliadocs.org/stable/) ali [Weave.jl](https://github.com/JunoLab/Weave.jl) je potrebno namestiti [TeX/LaTeX](https://tug.org/). Priporočam uporabo [TinyTeX](https://yihui.org/tinytex/).
+Po [namestitvi](https://yihui.org/tinytex/#installation) tinytex, dodamo še nekaj `LaTeX` paketov, tako da v terminalu izvedemo naslednji ukaz
+
+```
+tlmgr install microtype upquote minted
+```
 
 ## Povezave
 

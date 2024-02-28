@@ -34,9 +34,16 @@ julia --project="VzorecVaje" -e "import Pkg; Pkg.test()"
 
 Poročilo generiramo s paketom [Weave.jl](https://github.com/JunoLab/Weave.jl). Podrobnosti so v datoteki `makedocs.jl`.
 
+V terminalu lahko z ukazom generiramo PDF datoteko
+
 ```shell
-$ cd docs
-$ julia makedocks.jl
+$ julia --project="VzorecVaje" VzorecVaje/docs/makedocks.jl
 ```
 
-Zgornji ukaz iz komentarjev in kode v `demo.jl` generira PDF datoteko.
+Podobno lahko storimo v julia REPL-u
+
+```jl
+julia> include("VzorecVaje/docs/makedocs.jl")
+```
+
+Zgornja ukaza iz komentarjev in kode v `demo.jl` generirata PDF datoteko.
