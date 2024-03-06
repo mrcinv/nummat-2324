@@ -14,13 +14,14 @@ Ob začetku vaje si najprej ustvarimo direktorij oziroma paket za Julio[^1], kje
 ```shell
 $ julia
 julia> # pritisnemo ], da pridemo v način pkg
-pkg> generate VajaXY
-pkg> activate VajaXY
-(VajaXY) pkg> # pritisnemo tipko za brisanje nazaj, da zopet pridemo v navaden način
+pkg> activate . # aktiviramo delovno okolje v trenutnem direktoriju (npr. vaje)
+(vaje)pkg> generate VajaXY # generiramo ogrodje za novo vajo
+(vaje)pkg> develop VajaXY  # dodamo pravkar generirano vajo v delovno okolje
+(vaje) pkg> # pritisnemo tipko za brisanje nazaj, da zopet pridemo v navaden način
 julia>
 ```
 
-Zgornji ukazi ustvarijo direktorij `VajaXY` z osnovno struktura [paketa v Jiliji](https://pkgdocs.julialang.org/v1/creating-packages/). Za bolj obsežen projekt, lahko uporabite [šablono PkgTemplates](https://github.com/JuliaCI/PkgTemplates.jl).
+Zgornji ukazi ustvarijo direktorij `VajaXY` z osnovno struktura [paketa v Jiliji](https://pkgdocs.julialang.org/v1/creating-packages/). Za bolj obsežen projekt, lahko uporabite [šablono PkgTemplates](https://github.com/JuliaCI/PkgTemplates.jl) ali [PkgSkeleton.jl](https://github.com/tpapp/PkgSkeleton.jl).
 
 ```shell
 julia> cd("VajaXY") # pritisnemo ;, da pridemo v način lupine
@@ -70,13 +71,13 @@ using VajaXY
 VajaXY.moja_super_funkcija()
 ```
 
-Scripto nato poženemo z ukazom `ìnclude`.
+Scripto lahko poženemo z ukazom `ìnclude`.
 
 ```shell
 julia> include("scripts/demo.jl")
 ```
 
-Začetno strukturo paketa si lahko shranimo v šablono.
+Začetno strukturo paketa si lahko shranimo v šablono in uporabimo [PkgSkeleton.jl](https://github.com/tpapp/PkgSkeleton.jl) za generiranje novih paketov.
 
 ### Testi
 
@@ -90,10 +91,10 @@ using Test, VajaXY
 @test VajaXY.funkcija_ki_vrne_ena() == 1
 ```
 
-Lahko teste poženemo tako, da v `pkg` načinu poženemo ukaz `test`
+Lahko teste poženemo tako, da v `pkg` načinu poženemo ukaz `test VajeXY`
 
 ```shell
-(VajaXY) pkg> test
+(vaje) pkg> test VajeXY
 
     Testing Running tests...
     Testing VajaXY tests passed
@@ -107,7 +108,7 @@ Za pripravo posameznih poročil lahko uporabite [IJulia](https://github.com/Juli
 
 ## Organizacija direktorijev
 
-- `vaje` direktorij z vajami
+- `vaje` direktorij z vajami, ki služi kot [delovno okolje](https://pkgdocs.julialang.org/v1/environments/)
 - `vaje/VajaXY` vsaka vaja ima svoj direktorij
 - posamezen direktorij za vajo je organiziran kot paket s kodo, testi in dokumentacijo
 
@@ -132,9 +133,13 @@ Za hitrejše in lažje delo z programskim jezikom `julia` uporabite [Revise](htt
 ```julia
 julia> using Revise
 ```
+Zgornji ukaz bo poskrbel, da se bodo definicije funkcij sproti posodabljale, ko bomo spreminjali kodo v datotekah.
 
-Namestite `startup.jl` v `.julia/config/startup.jl`, da se `Revise` zažene ob zagonu `julia`.
+Če želite,  da se `Revise` zažene ob vsakem zagonu programa `julia`, lahko datoteko `startup.jl` namestite v `.julia/config/startup.jl`
 
+```shell
+$ cp startup.jl $HOME/.julia/config/startup.jl
+```
 ### Generiranje PDF dokumentov
 
 Za generiranje PDF dokumentov s paketi [Documenter](https://documenter.juliadocs.org/stable/) ali [Weave.jl](https://github.com/JunoLab/Weave.jl) je potrebno namestiti [TeX/LaTeX](https://tug.org/). Priporočam uporabo [TinyTeX](https://yihui.org/tinytex/).
