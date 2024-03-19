@@ -85,7 +85,7 @@ end
   fl(y) = y
   h = 0.1
   meje = ((0, 1), (0, 2))
-  robni_problem = RobniProblemPravokotnik(meje, [fs, fd, fz, fl])
+  robni_problem = RobniProblemPravokotnik(LaplaceovOperator(2), meje, [fs, fd, fz, fl])
   Z, x, y = resi(robni_problem; nx=10, ny=20)
   @testset "dimenzije" begin
     @test size(Z) == (22, 12)
