@@ -2,7 +2,7 @@
 
 julia_version = "1.10.2"
 manifest_format = "2.0"
-project_hash = "29e2e92088f69c761242c16680991affbdb9a70a"
+project_hash = "af94b27883216a4e36d1156813712590b1d64c00"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -939,6 +939,11 @@ version = "0.1.0"
 deps = ["LinearAlgebra", "SparseArrays", "Test"]
 path = "Vaje06"
 uuid = "c827edc3-f50b-4633-a08f-4f86f6cbb3cd"
+version = "0.1.0"
+
+[[deps.Vaje07]]
+path = "Vaje07"
+uuid = "dc6b9d61-1dba-4632-8d14-591c2736dc25"
 version = "0.1.0"
 
 [[deps.VersionParsing]]
