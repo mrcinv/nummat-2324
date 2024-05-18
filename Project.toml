@@ -2,6 +2,8 @@
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
 Coverage = "a2441757-f6aa-5fb2-8edb-039e3f45d037"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+DomNal2 = "9eae297a-06a1-4eb6-a561-50e2c4012a07"
+ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
